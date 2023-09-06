@@ -59,6 +59,4 @@ if (!process.env.GHTOKEN) process.exit(1);
 
 app.listen(5689, () => {
   console.log(`API online!`);
-
-  console.log();
 });
