@@ -39,15 +39,18 @@ app.post("/issue", async (req, res) => {
 
   if (!report) return err(404);
 
-  console.log(report);
-
   const issue = await createIssue(report, process.env.GHTOKEN as string);
 
   if (!issue) return err(500);
 
-  res.contentType("application/json");
-  res.write(JSON.stringify(issue));
-  res.end();
+  try {
+    res.contentType("application/json");
+    res.write(JSON.stringify(issue));
+    res.end();
+  } catch (e) {
+    console.log("WARN: couldn't write response!");
+    console.log(e);
+  }
 });
 
 config();
